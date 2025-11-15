@@ -14,7 +14,7 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <header className="bg-white sticky top-0 z-50 shadow-[0_0_11px_-1px_rgba(0,0,0,0.25)]">
+        <header className="bg-[#f2f2f2] sticky top-0 z-50 shadow-[0_0_11px_-1px_rgba(0,0,0,0.25)]">
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
                 <div className="flex items-center gap-2 font-semibold text-lg">
