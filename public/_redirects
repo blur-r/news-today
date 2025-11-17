@@ -1,0 +1,2 @@
+# Netlify: Proxy /v2 requests to NewsAPI in production
+/v2/*  https://newsapi.org/v2/:splat  200
