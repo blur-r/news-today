@@ -71,16 +71,16 @@ const Header: React.FC = () => {
                     {navLinks.map((item) => (
                         <button
                             key={item}
-                            className="text-left py-2 border-b border-gray-100"
+                            className={`text-left py-2 border-b border-gray-100 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                         >
                             {item}
                         </button>
                     ))}
 
                     <div className="flex items-center gap-3 pt-2">
-                        <Bell className="w-5 h-5 text-gray-500" />
+                        <Bell className={`w-5 h-5 ${darkMode ? "text-gray-300" : "text-gray-500"}`} />
                         <button onClick={() => setDarkMode(!darkMode)}>
-                            {darkMode ? <Sun className="w-5 h-5 text-gray-500 hover:text-black" /> : <Moon className="w-5 h-5 text-gray-500 hover:text-black" />}
+                            {darkMode ? <Sun className={`w-5 h-5 ${darkMode ? "text-gray-300" : "text-gray-500"}`} /> : <Moon className={`w-5 h-5 ${darkMode ? "text-gray-300" : "text-gray-500"}`} />}
                         </button>
                     </div>
                 </nav>
