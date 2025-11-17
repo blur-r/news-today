@@ -8,7 +8,7 @@ const NewsCard = ({ article }: ArticleProp) => {
     const { title, description, publishedAt, urlToImage } = article
     return (
         <Link to={`/detail/${article.id}`}>
-            <div className=" w-[90%] md:w-[280px] flex flex-col gap-3 mx-auto">
+            <div className=" w-[90%] md:w-[280px] h-[380px] flex flex-col gap-3 mx-auto">
                 <img
                     src={urlToImage || "/images/box shadow.png"}
                     alt={title}
@@ -18,7 +18,7 @@ const NewsCard = ({ article }: ArticleProp) => {
                 <p className="text-[14px] text-gray-600 line-clamp-3">
                     {description || "No description available."}
                 </p>
-                <span className="text-[13px] text-gray-600">
+                <span className="text-[13px] text-gray-600 mt-auto">
                     {formatDate(publishedAt)}
                 </span>
             </div>

@@ -3,6 +3,7 @@ import SearchBar from "../components/SearchBar";
 import Categories from "../components/Categories";
 import Hero from "../components/Hero";
 import RecentArticles from "../components/RecentArticles";
+import Footer from "../components/Footer";
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <Categories />
             <Hero />
             <RecentArticles />
+            <Footer />
         </div>
 
     );

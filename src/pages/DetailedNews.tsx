@@ -18,7 +18,7 @@ const DetailedNews: React.FC = () => {
                     <a href="#" className="hover:text-blue-600">Technology</a>
                 </nav>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+                <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
                     {article?.title}
                 </h1>
 
