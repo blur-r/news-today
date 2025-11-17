@@ -51,7 +51,7 @@ import { generateId } from "../utils";
 
 // Use relative URL so Vite proxy handles TLS
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const BASE_URL = "/v2"; // This + package.json proxy = 426 GONE!
+const BASE_URL = "/v2";
 
 const fetchAndEnrich = async (url: string): Promise<Article[]> => {
     const res = await fetch(url);
