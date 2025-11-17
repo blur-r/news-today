@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Search, Bell, Calendar, Moon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
     const [open, setOpen] = useState(false);
@@ -17,10 +18,12 @@ const Header: React.FC = () => {
         <header className="bg-[#f2f2f2] sticky top-0 z-50 shadow-[0_0_11px_-1px_rgba(0,0,0,0.25)]">
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
-                <div className="flex items-center gap-2 font-semibold text-lg">
-                    <div className="text-blue-600   "><Calendar /></div>
-                    <span className="font-bold text-2xl">News Today</span>
-                </div>
+                <Link to={'/'}>
+                    <div className="flex items-center gap-2 font-semibold text-lg">
+                        <div className="text-blue-600   "><Calendar /></div>
+                        <span className="font-bold text-2xl">News Today</span>
+                    </div>
+                </Link>
 
                 <nav className="hidden md:flex items-center gap-6 text-sm text-gray-600">
                     {navLinks.map((item) => (

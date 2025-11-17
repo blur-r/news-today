@@ -1,34 +1,38 @@
-import { useState } from "react";
+import type { Category } from "../context/AppContext";
+import { useNewsContext } from "../context/AppContext";
+
+const categoryList: { value: Category; label: string }[] = [
+    { value: "all", label: "All" },
+    { value: "top", label: "Top stories" },
+    { value: "business", label: "Business" },
+    { value: "entertainment", label: "Entertainment" },
+    { value: "general", label: "General" },
+    { value: "health", label: "Health" },
+    { value: "science", label: "Science" },
+    { value: "sports", label: "Sports" },
+    { value: "technology", label: "Technology" },
+];
 
 const Categories: React.FC = () => {
-    const categories = [
-        "All",
-        "Top Stories",
-        "World",
-        "Politics",
-        "Business",
-        "Tech",
-    ];
-    const [selectedCategory, setSelectedCategory] = useState("All");
+    const { category, setCategory } = useNewsContext();
 
     return (
-        <div className="flex items-center mt-4 mx-auto w-[90%] md:w-[60%]">
-            {categories.map((cat) => (
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-6 mx-auto w-[95%] md:w-[70%]">
+            {categoryList.map(({ value, label }) => (
                 <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-2 rounded-full text-sm whitespace-nowrap transition cursor-pointer md:px-4
-        ${selectedCategory === cat
-                            ? "bg-blue-600 text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    key={value}
+                    onClick={() => setCategory(value)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap
+            ${category === value
+                            ? "bg-blue-600 text-white shadow-lg scale-105"
+                            : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
                         }`}
                 >
-                    {cat}
+                    {label}
                 </button>
             ))}
         </div>
+    );
+};
 
-    )
-}
-
-export default Categories
+export default Categories;

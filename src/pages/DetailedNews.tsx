@@ -1,7 +1,13 @@
 import { Heart, MessageSquare, Bookmark, Share2 } from 'lucide-react';
 import Header from "../components/Header";
+import { useParams } from "react-router-dom"
+import { useNewsContext } from '../context/AppContext';
+import { formatDate, trimContent } from "../utils";
 
 const DetailedNews: React.FC = () => {
+    const { id } = useParams();
+    const { articles } = useNewsContext();
+    const article = articles.find(a => a.id === id);
     return (
         <div>
             <Header />
@@ -13,24 +19,29 @@ const DetailedNews: React.FC = () => {
                 </nav>
 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-                    Tech Giants Unveil New Innovations at Annual Conference
+                    {article?.title}
                 </h1>
 
                 <p className="text-sm text-gray-600 mb-8">
-                    By <span className="font-medium text-gray-900">Amelia Harper</span> • Published on July 26, 2024
+                    By <span className="font-medium text-gray-900">{article?.author}</span> • Published on {formatDate(article?.publishedAt || "")}
                 </p>
 
-                <div className="bg-linear-to-b from-gray-700 to-gray-900 rounded-lg h-96 mb-8 flex items-center justify-center">
-                    <div className="bg-gray-800 bg-opacity-50 border-2 border-dashed border-gray-600 rounded-xl w-full h-full max-w-4xl"></div>
+                <div className=" rounded-lg  mb-8 flex items-center justify-center  w-[90%] h-[40%] md:w-full mx-auto">
+                    <img src={article?.urlToImage} alt="" className='w-full rounded-2xl' />
                 </div>
 
                 <article className="prose prose-lg max-w-none mb-12 text-gray-700">
                     <p>
-                        The annual Tech Innovators Conference wrapped up yesterday, showcasing groundbreaking advancements from leading technology companies. This year’s event highlighted innovations in artificial intelligence, sustainable technology, and virtual reality, setting the stage for future industry trends. Keynote speakers from several major firms presented their latest products and strategies, emphasizing a commitment to user-centric design and ethical considerations in technology development.
+                        {trimContent(article?.content || "Content not available.")}
                     </p>
-                    <p>
-                        The conference also featured interactive exhibits and workshops, allowing attendees to experience the new technologies firsthand and engage with industry experts. The overall sentiment was optimistic, with a strong focus on collaboration and the potential for technology to address global challenges.
-                    </p>
+                    <a
+                        href={article?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline mt-3 inline-block"
+                    >
+                        Read full article →
+                    </a>
                 </article>
 
                 <div className="flex items-center space-x-6 py-4 border-t border-b border-gray-200 mb-12 justify-center">
@@ -55,23 +66,18 @@ const DetailedNews: React.FC = () => {
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Article 1 */}
                         <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
                             <div className="flex">
-                                <div className="bg-teal-500 p-8 flex items-center justify-center">
-                                    <div className="bg-teal-600 p-6 rounded-lg">
-                                        <div className="bg-teal-700 w-12 h-12 rounded-full flex items-center justify-center">
-                                            <div className="bg-teal-800 w-6 h-6 rounded-full"></div>
-                                        </div>
-                                    </div>
+                                <div className="flex items-center justify-center">
+                                    <img src="/images/Screenshot (37).png" alt="" className='h-full w-40' />
                                 </div>
                                 <div className="p-6 flex-1">
                                     <span className="text-xs font-semibold text-blue-600 uppercase">Technology</span>
                                     <h3 className="text-lg font-bold text-gray-900 mt-1 mb-2">
-                                        The Future of AI: Trends and Predictions
+                                        Sustainable Tech: Innovations for a Greener Future
                                     </h3>
                                     <p className="text-sm text-gray-600 mb-3">
-                                        Experts discuss the potential impact of AI on various industries.
+                                        Companies are developing eco-friendly solutions to reduce environmental impact.
                                     </p>
                                     <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-800">
                                         Read More →
@@ -80,15 +86,10 @@ const DetailedNews: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Article 2 */}
                         <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
                             <div className="flex">
-                                <div className="bg-linear-to-b from-green-700 to-green-900 p-8 flex items-center justify-center">
-                                    <div className="bg-green-800 bg-opacity-80 p-6 rounded-lg">
-                                        <div className="bg-green-900 w-16 h-12 rounded flex items-center justify-center text-green-300 text-xs font-mono">
-                                            18°C
-                                        </div>
-                                    </div>
+                                <div className="flex items-center justify-center">
+                                    <img src="/images/Screenshot (37).png" alt="" className='h-full w-40' />
                                 </div>
                                 <div className="p-6 flex-1">
                                     <span className="text-xs font-semibold text-blue-600 uppercase">Technology</span>
@@ -110,7 +111,6 @@ const DetailedNews: React.FC = () => {
                 <section className="bg-white rounded-lg shadow-sm p-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">Comments (2)</h2>
 
-                    {/* Comment 1 */}
                     <div className="flex space-x-4 mb-6 pb-6 border-b border-gray-200">
                         <div className="w-10 h-10 bg-orange-500 rounded-full shrink-0"></div>
                         <div className="flex-1">
@@ -124,7 +124,6 @@ const DetailedNews: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Comment 2 */}
                     <div className="flex space-x-4 mb-8">
                         <div className="w-10 h-10 bg-pink-500 rounded-full shrink-0"></div>
                         <div className="flex-1">

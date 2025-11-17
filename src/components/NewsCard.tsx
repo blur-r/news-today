@@ -1,12 +1,29 @@
-const NewsCard = () => {
+import type { Article } from "../types/Types";
+import { formatDate } from "../utils";
+import { Link } from "react-router-dom";
+type ArticleProp = {
+    article: Article
+}
+const NewsCard = ({ article }: ArticleProp) => {
+    const { title, description, publishedAt, urlToImage } = article
     return (
-        <div className=" w-[90%] md:w-[280px] flex flex-col gap-3">
-            <img src="/images/box shadow.png" alt="" className="h-[200px] md:h-[150px] rounded-md" />
-            <h1 className="font-bold text-xl">Tech Giants Unveils New Inovation</h1>
-            <p className="text-[14px] text-gray-600"> A significant political event has just occurred, impacting global relations and sparking
-                widespread discussion.</p>
-            <span className="text-[13px] text-gray-600">Oct 25, 2023</span>
-        </div>
+        <Link to={`/detail/${article.id}`}>
+            <div className=" w-[90%] md:w-[280px] flex flex-col gap-3">
+                <img
+                    src={urlToImage || "/images/box shadow.png"}
+                    alt={title}
+                    className="h-[200px] md:h-[150px] rounded-md object-cover"
+                />
+                <h1 className="font-bold text-xl">{title}</h1>
+                <p className="text-[14px] text-gray-600 line-clamp-3">
+                    {description || "No description available."}
+                </p>
+                <span className="text-[13px] text-gray-600">
+                    {formatDate(publishedAt)}
+                </span>
+            </div>
+        </Link>
+
     )
 }
 
