@@ -8,7 +8,7 @@ const NewsCard = ({ article }: ArticleProp) => {
     const { title, description, publishedAt, urlToImage } = article
     return (
         <Link to={`/detail/${article.id}`}>
-            <div className=" w-[90%] md:w-[280px] flex flex-col gap-3">
+            <div className=" w-[90%] md:w-[280px] flex flex-col gap-3 mx-auto">
                 <img
                     src={urlToImage || "/images/box shadow.png"}
                     alt={title}
