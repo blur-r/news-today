@@ -78,18 +78,17 @@ const fetchAndEnrich = async (url: string): Promise<Article[]> => {
 
 export const useNews = () => {
     const getTopHeadlines = useCallback(async () => {
-        return fetchAndEnrich(`${BASE_URL}/top-headlines?country=ng&apiKey=${API_KEY}`);
+        return fetchAndEnrich(`${BASE_URL}/top-headlines?country=us&apiKey=${API_KEY}`);
     }, []);
 
     const getAllArticles = useCallback(async () => {
-        return fetchAndEnrich(
-            `${BASE_URL}/everything?q=latest&pageSize=50&sortBy=publishedAt&apiKey=${API_KEY}`
+        return fetchAndEnrich(`${BASE_URL}/everything?q=latest&pageSize=20&sortBy=publishedAt&apiKey=${API_KEY}`
         );
     }, []);
 
     const getNewsByCategory = useCallback(async (category: string) => {
         return fetchAndEnrich(
-            `${BASE_URL}/top-headlines?country=ng&category=${category}&apiKey=${API_KEY}`
+            `${BASE_URL}/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
         );
     }, []);
 
