@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Menu, X, Search, Bell, Calendar, Moon } from "lucide-react";
+import { Menu, X, Search, Bell, Calendar, Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useNewsContext } from "../context/AppContext";
 
 const Header: React.FC = () => {
     const [open, setOpen] = useState(false);
+    const { darkMode, setDarkMode } = useNewsContext();
 
     const navLinks = [
         "Top Stories",
@@ -15,7 +17,7 @@ const Header: React.FC = () => {
     ];
 
     return (
-        <header className="bg-[#f2f2f2] sticky top-0 z-50 shadow-[0_0_11px_-1px_rgba(0,0,0,0.25)]">
+        <header className={`sticky top-0 z-50 shadow-[0_0_11px_-1px_rgba(0,0,0,0.25)] ${darkMode ? "bg-[#111C38] text-white" : "bg-[#f2f2f2]"}`}>
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
                 <Link to={'/'}>
@@ -25,7 +27,7 @@ const Header: React.FC = () => {
                     </div>
                 </Link>
 
-                <nav className="hidden md:flex items-center gap-6 text-sm text-gray-600">
+                <nav className={`hidden md:flex items-center gap-6 text-sm ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                     {navLinks.map((item) => (
                         <button key={item} className="hover:text-black cursor-pointer">
                             {item}
@@ -34,11 +36,13 @@ const Header: React.FC = () => {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-5">
-                    <span className="flex gap-1.5 bg-[#fcfafa] px-3 py-1 rounded-md items-center">
+                    <span className={`flex gap-1.5 px-3 py-1 rounded-md items-center ${darkMode ? "bg-[#1F2937]" : "bg-[#fcfafa]"}`}>
                         <Search className="w-5 h-5 text-gray-500 hover:text-black" />
                         <input type="search" name="" id="" className="outline-none focus:outline-none" />
                     </span>
-                    <Moon className="w-5 h-5 text-gray-500 hover:text-black" />
+                    <button onClick={() => setDarkMode(!darkMode)}>
+                        {darkMode ? <Sun className="w-5 h-5 text-gray-500 hover:text-black" /> : <Moon className="w-5 h-5 text-gray-500 hover:text-black" />}
+                    </button>
                     <Bell className="w-5 h-5 text-gray-500 hover:text-black" />
                 </div>
 
@@ -75,7 +79,9 @@ const Header: React.FC = () => {
 
                     <div className="flex items-center gap-3 pt-2">
                         <Bell className="w-5 h-5 text-gray-500" />
-                        <span>Notifications</span>
+                        <button onClick={() => setDarkMode(!darkMode)}>
+                            {darkMode ? <Sun className="w-5 h-5 text-gray-500 hover:text-black" /> : <Moon className="w-5 h-5 text-gray-500 hover:text-black" />}
+                        </button>
                     </div>
                 </nav>
             </div>

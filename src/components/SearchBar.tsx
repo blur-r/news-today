@@ -3,12 +3,14 @@ import SearchCard from "./SearchCard";
 import { useState, useEffect } from "react";
 import { useNews } from "../hooks/useNews";
 import type { Article } from "../types/Types";
+import { useNewsContext } from "../context/AppContext";
 const SearchBar: React.FC = () => {
     const [query, setQuery] = useState<string>("");
     const [results, setResults] = useState<Article[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { searchNews } = useNews()
+    const { darkMode } = useNewsContext();
 
     useEffect(() => {
         const timer = setTimeout(async () => {
@@ -35,20 +37,20 @@ const SearchBar: React.FC = () => {
 
     return (
         <div className="mx-auto w-[90%] md:w-[60%] relative">
-            <div className="flex items-center gap-3 p-2.5 rounded-md mt-10 mx-auto bg-white shadow-md">
+            <div className={`flex items-center gap-3 p-2.5 rounded-md mt-10 mx-auto ${darkMode ? "bg-[#111C38] shadow-md" : "bg-white shadow-md"}`}>
                 <Search className="w-5 h-5 text-gray-500" />
                 <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search news in Nigeria..."
-                    className="flex-1 outline-none text-gray-800 placeholder-gray-400"
+                    className={`flex-1 outline-none ${darkMode ? "text-gray-300 placeholder-gray-500" : "text-gray-800 placeholder-gray-400"}`}
                 />
             </div>
 
             {query && (
 
-                <div className="bg-white w-full md:w-[670px] rounded-md mt-7 shadow-lg p-4 max-h-80 overflow-y-scroll">
+                <div className={`w-full md:w-[670px] rounded-md mt-7 shadow-lg p-4 max-h-80 overflow-y-scroll ${darkMode ? "bg-[#111C38]" : "bg-white"}`}>
                     <p>Showing {results.length} results for "{query}"</p>
 
                     {loading && (

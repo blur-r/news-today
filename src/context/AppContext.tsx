@@ -19,6 +19,8 @@ interface NewsContextType {
     articles: Article[];
     loading: boolean;
     error: string | null;
+    darkMode: boolean;
+    setDarkMode: (val: boolean) => void;
 }
 
 const NewsContext = createContext<NewsContextType | undefined>(undefined);
@@ -30,6 +32,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
     const [articles, setArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [darkMode, setDarkMode] = useState(false);
 
     const loadNews = async () => {
         try {
@@ -61,7 +64,7 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <NewsContext.Provider
-            value={{ category, setCategory, articles, loading, error }}
+            value={{ category, setCategory, articles, loading, error, darkMode, setDarkMode }}
         >
             {children}
         </NewsContext.Provider>

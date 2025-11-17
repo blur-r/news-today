@@ -4,10 +4,12 @@ const footerLinks = [
     { value: "privacy", label: "Privacy Policy" },
     { value: "terms", label: "Terms of Service" },
 ]
+import { useNewsContext } from "../context/AppContext";
 
 const Footer = () => {
+    const { darkMode } = useNewsContext();
     return (
-        <div className="bg-white p-5 md:p-10 mt-4">
+        <div className={`p-5 md:p-10 mt-4 ${darkMode ? "bg-[#111C38]" : "bg-white"}`}>
             <div className="flex gap-3 justify-center">
                 {footerLinks.map((link) => {
                     return <p className="text-sm">{link.label}</p>

@@ -4,10 +4,12 @@ import Categories from "../components/Categories";
 import Hero from "../components/Hero";
 import RecentArticles from "../components/RecentArticles";
 import Footer from "../components/Footer";
+import { useNewsContext } from "../context/AppContext";
 
 const Home = () => {
+    const { darkMode } = useNewsContext();
     return (
-        <div className="">
+        <div className={`${darkMode ? "bg-[#1F2937] text-white" : "bg-[#f2f2f2]"}`}>
             <Header />
             <SearchBar />
             <Categories />
