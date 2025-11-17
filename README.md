@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# NewsRoom – News App  
+**A fast, beautiful, and fully responsive news aggregator **
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Demo: https://newsroomapp.netlify.app  
 
-Currently, two official plugins are available:
+## Features
+- Real-time headlines  
+- Top headlines, categories (Business, Sports, Entertainment, etc.)  
+- Powerful search with instant results  
+- Full in-app article detail pages (no leaving the app!)  
+- Mobile-first, super smooth UI  
+- Built with React 19 + Vite + Tailwind CSS + React Router v7  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+| Technology           | Purpose                          |
+|----------------------|----------------------------------|
+| React 19 + TypeScript| Modern, type-safe UI             |
+| Vite                 | Lightning-fast dev server & build|
+| Tailwind CSS         | Beautiful, responsive design     |
+| Lucide React         | Clean icons                      |
+| React Router v7      | Client-side routing              |
+| NewsAPI.org          | Source of news articles          |
+| Netlify              | Free, instant global deployment |
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+```
+src/
+├── components/      # Reusable UI components
+├── context/         # NewsContext (global state)
+├── hooks/           # useNews.ts (all API logic)
+├── pages/           # Home, ArticleDetail, etc.
+├── types/           # TypeScript interfaces
+├── utils/           # generateId.ts (unique IDs)
+├── public/
+│   └── _redirects   # Netlify proxy for /v2 → newsapi.org
+└── App.tsx          # Routes
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Local Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone & Install
+```bash
+https://github.com/blur-r/news-today.git
+cd newsroom
+npm install
 ```
+
+### 2. Get a Free API Key
+1. Go to https://newsapi.org/register  
+2. Copy your API key
+
+### 3. Create `.env` file in project root
+```env
+VITE_NEWS_API_KEY=your_actual_api_key_here
+```
+
+### 4. Run locally
+```bash
+npm run dev
+```
+→ Open http://localhost:5173
+
+## Deploy on Netlify (Free & Instant)
+
+### Option A – Drag & Drop (Fastest)
+1. Run `npm run build`
+2. Drag the entire `dist` folder into https://app.netlify.com/drop
+
+### Option B – Connect GitHub (Recommended)
+1. Push your code to GitHub
+2. Go to https://app.netlify.com → Add new site → Connect to GitHub
+3. Build settings (Netlify auto-detects):
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+4. Add environment variable:
+   - Key: `VITE_NEWS_API_KEY`
+   - Value: your NewsAPI key
+
+**Important**: The file `public/_redirects` is already included – it fixes the `/v2` proxy on production so you never get 404 errors again.
+
+## API Proxy (Why It Works on Netlify)
+```text
+/v2/*  https://newsapi.org/v2/:splat  200
+```
+This line in `public/_redirects` forwards all `/v2` requests to NewsAPI.org in production (the Vite proxy only works in dev).
+
+## License
+MIT © 2025 – Feel free to use, modify, and launch your own version!
+
